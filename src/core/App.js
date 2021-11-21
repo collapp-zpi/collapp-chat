@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Plugin from "../plugin/components/client";
 import Slider from "rc-slider";
+import { useWebsockets } from "./useWebsockets";
 import "rc-slider/assets/index.css";
 import "./index.css";
 
@@ -57,12 +58,19 @@ function App() {
           }}
         >
           <Plugin
-            websockets="fake_url"
+            useWebsockets={() => useWebsockets("")}
             ids={{
               plugin: "test",
               space: "test",
+              user: "test",
             }}
             size={{ top: 0, left: 0, width, height }}
+            users={{
+              test: {
+                name: "test",
+                image: "https://collapp.live/default-user.png",
+              },
+            }}
           />
         </div>
       </main>

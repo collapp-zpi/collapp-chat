@@ -1,7 +1,13 @@
-const set = (state, data) => {
+const send_message = (state, data) => {
   return {
     ...state,
-    arr: [...(state.arr || []), data.item],
+    chat: [
+      ...(state.chat || []),
+      {
+        ...data,
+        date: new Date().getTime(),
+      },
+    ],
   };
 };
 
@@ -10,7 +16,7 @@ const open = (state, data) => {
 };
 
 const events = {
-  set,
+  send_message,
   __OPEN: open,
 };
 
