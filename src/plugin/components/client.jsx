@@ -3,6 +3,11 @@ import { CgSpinner } from "react-icons/cg";
 import { BiSend } from "react-icons/all";
 import classNames from "classnames";
 import AnchorifyText from "react-anchorify-text/lib/components/AnchorifyText";
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+import styles from '../styles/style.module.scss'
+
+dayjs.extend(localizedFormat)
 
 const defaultUserImage = 'https://collapp.live/default-user.png'
 
@@ -67,8 +72,16 @@ function Plugin({ useWebsockets, ids, users }) {
                   {messages.map(({ message, date }) => (
                     <div
                       key={date}
-                      className={classNames("px-4 py-2 rounded-3xl break-words", isCurrent ? "last:rounded-br-lg text-white bg-blueGray-500" : "last:rounded-bl-lg bg-gray-200 text-gray-500")}
+                      className={classNames(
+                        "px-4 py-2 rounded-3xl break-words relative",
+                        "after:content-[attr(data-date)] after:block after:whitespace-nowrap after:pointer-events-none after:z-10 after:text-white after:bg-black after:bg-opacity-50 after:backdrop-blur-sm after:-translate-y-full after:-top-1 after:text-xs after:px-2 after:py-1 after:pointer-events-none after:opacity-0 after:rounded-md after:absolute",
+                        isCurrent
+                          ? "last:rounded-br-lg text-white bg-blueGray-500 after:right-0"
+                          : "last:rounded-bl-lg bg-gray-200 text-gray-500 after:left-0",
+                        styles.message
+                      )}
                       style={{ wordBreak: 'break-word' }}
+                      data-date={dayjs(date).format('LLL')}
                     >
                       <AnchorifyText text={message}>
                         <CustomAnchor />

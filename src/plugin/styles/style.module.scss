@@ -1,0 +1,10 @@
+.message {
+  &:hover::after {
+    opacity: 1;
+    transition: opacity 0.15s ease 0.5s;
+  }
+
+  &::after {
+    transition: opacity 0.15s ease;
+  }
+}
