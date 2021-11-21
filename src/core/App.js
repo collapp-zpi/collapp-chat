@@ -12,6 +12,7 @@ const gap = 20;
 function App() {
   const [width, setWidth] = useState(config.width || 3);
   const [height, setHeight] = useState(config.height || 2);
+  const [user, setUser] = useState('test1')
 
   return (
     <div className="bg-warmGray-100 min-h-screen">
@@ -47,6 +48,13 @@ function App() {
               value={height}
             />
           </div>
+          <div>
+            <select onChange={(e) => setUser(e.target.value)} value={user}>
+              <option value="test1">User 1</option>
+              <option value="test2">User 2</option>
+              <option value="test3">User 3</option>
+            </select>
+          </div>
         </div>
       </div>
       <main className="w-full min-h-[75vh] overflow-hidden flex flex-col justify-center justify-items-center py-16">
@@ -62,13 +70,21 @@ function App() {
             ids={{
               plugin: "test",
               space: "test",
-              user: "test",
+              user,
             }}
             size={{ top: 0, left: 0, width, height }}
             users={{
               test: {
-                name: "test",
+                name: "test1",
                 image: "https://collapp.live/default-user.png",
+              },
+              test2: {
+                name: "test2",
+                image: "https://collapp.live/default-space.png",
+              },
+              test3: {
+                name: "test3",
+                image: "https://collapp.live/default-plugin.png",
               },
             }}
           />
